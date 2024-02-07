@@ -1,5 +1,5 @@
 // @ts-check
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vitest } from "vitest";
 import { Todo } from "./Todo";
 
 describe("Todo model", () => {
@@ -7,7 +7,8 @@ describe("Todo model", () => {
   let todoModel;
 
   beforeEach(() => {
-    todoModel = new Todo();
+    todoModel = new Todo("todo-test");
+    todoModel.reset();
   });
 
   it("should init with empty list", () => {
