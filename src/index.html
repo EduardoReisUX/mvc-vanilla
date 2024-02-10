@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="./index.js" defer></script>
+
+    <title>Plan, Do, Act, Check!</title>
+  </head>
+
+  <body>
+    <h1>Plan your day, plan your tasks, plan your success.</h1>
+
+    <section class="input-data">
+      <input
+        type="text"
+        placeholder="What needs to be done today?"
+        data-todo="new"
+      />
+
+      <button data-todo="delete">Delete completed todos</button>
+    </section>
+
+    <!-- <ul data-todo="list"></ul> -->
+
+    <table class="todo-table">
+      <thead class="todo-table-head">
+        <tr class="todo-table-row">
+          <th class="todo-table-th">Id</th>
+          <th class="todo-table-th">Title</th>
+          <th class="todo-table-th">Completed</th>
+          <th class="todo-table-th">Remove</th>
+        </tr>
+      </thead>
+      <tbody data-todo="table-body"></tbody>
+    </table>
+  </body>
+</html>
