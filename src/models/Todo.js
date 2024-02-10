@@ -45,13 +45,17 @@ export class Todo extends EventTarget {
     return this.#todos;
   }
 
+  getAllCompletedTodos() {
+    return this.#todos.filter((todo) => todo.completed === true);
+  }
+
   /**
    *
    * @param {{title:  string}} param0
    */
   addTodo({ title }) {
     this.#todos.push({
-      id: `id_${Date.now()}`,
+      id: crypto.randomUUID(),
       title,
       completed: false,
     });
@@ -78,10 +82,15 @@ export class Todo extends EventTarget {
 
   /**
    *
-   * @param {{ id: string }} param0
+   * @param {{ id: string | null | undefined }} param0
    */
   removeTodo({ id }) {
     this.#todos = this.#todos.filter((todo) => todo.id !== id);
+    this.#save();
+  }
+
+  removeCompletedTodos() {
+    this.#todos = this.#todos.filter((todo) => todo.completed === false);
     this.#save();
   }
 
