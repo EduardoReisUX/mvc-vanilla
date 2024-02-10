@@ -1,5 +1,5 @@
 // @ts-check
-import { describe, it, expect, beforeEach, vitest } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { Todo } from "./Todo";
 
 describe("Todo model", () => {
@@ -33,9 +33,9 @@ describe("Todo model", () => {
 
     todoModel.toggleTodo({ id: todo.id });
 
-    expect(todoModel.getAllTodos()[0]).toHaveProperty("id");
-    expect(todoModel.getAllTodos()[0]).toHaveProperty("title", "Hello world");
-    expect(todoModel.getAllTodos()[0]).toHaveProperty("completed", true);
+    expect(todo).toHaveProperty("id");
+    expect(todo).toHaveProperty("title", "Hello world");
+    expect(todo).toHaveProperty("completed", true);
   });
 
   it("should remove a todo", () => {
@@ -46,5 +46,21 @@ describe("Todo model", () => {
     todoModel.removeTodo({ id: todo.id });
 
     expect(todoModel.getAllTodos()).empty;
+  });
+
+  it("should remove all completed todos", () => {
+    todoModel.addTodo({ title: "Ninjutsu" });
+    todoModel.addTodo({ title: "Genjutsu" });
+    todoModel.addTodo({ title: "Taijutsu" });
+
+    const [first, second, third] = todoModel.getAllTodos();
+
+    todoModel.toggleTodo({ id: first.id });
+    todoModel.toggleTodo({ id: third.id });
+
+    todoModel.removeCompletedTodos();
+
+    expect(todoModel.getAllTodos()).toHaveLength(1);
+    expect(todoModel.getAllTodos()).toContainEqual(second);
   });
 });
