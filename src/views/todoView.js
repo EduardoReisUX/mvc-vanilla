@@ -33,7 +33,6 @@ export function renderTodoTable(todos) {
   todos.forEach(({ id, title, completed }) => {
     markup += `
       <tr id="${id}">
-          <td>${id}</td>
           <td ${
             completed && "style='text-decoration: line-through'"
           }>${title}</td>

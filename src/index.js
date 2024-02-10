@@ -37,6 +37,7 @@ export const main = {
   /** @param {MouseEvent} event  */
   removeTodo(event) {
     if (!(event.target instanceof HTMLButtonElement)) return;
+
     if (event.target.getAttribute("data-todo") !== "remove") return;
 
     const id = event.target.closest("[id]")?.getAttribute("id");
@@ -55,13 +56,19 @@ export const main = {
   },
 
   deleteCompletedTodos() {
-    const todos = todoModel.getAllTodos();
+    const completedTodos = todoModel.getAllCompletedTodos();
 
-    const completedTodos = todos.filter((todo) => todo.completed === true);
+    if (!completedTodos.length) return alert("There are no completed todo.");
 
-    completedTodos.forEach((completedTodo) => {
-      todoModel.removeTodo({ id: completedTodo.id });
-    });
+    const confirmDelete = confirm(
+      `Do you really want do delete ${completedTodos.length} ${
+        completedTodos.length > 1 ? "todos" : "todo"
+      }?`
+    );
+
+    if (!confirmDelete) return;
+
+    todoModel.removeCompletedTodos();
   },
 
   render() {

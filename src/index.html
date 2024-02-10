@@ -13,25 +13,25 @@
   <body>
     <h1>Plan your day, plan your tasks, plan your success.</h1>
 
-    <section class="input-data">
+    <section class="data-section">
       <input
+        class="data-section__input"
         type="text"
         placeholder="What needs to be done today?"
         data-todo="new"
       />
 
-      <button data-todo="delete">Delete completed todos</button>
+      <button class="data-section__delete-button" data-todo="delete">
+        Delete completed todos
+      </button>
     </section>
 
-    <!-- <ul data-todo="list"></ul> -->
-
     <table class="todo-table">
-      <thead class="todo-table-head">
-        <tr class="todo-table-row">
-          <th class="todo-table-th">Id</th>
-          <th class="todo-table-th">Title</th>
-          <th class="todo-table-th">Completed</th>
-          <th class="todo-table-th">Remove</th>
+      <thead class="todo-table__head">
+        <tr class="todo-table__row">
+          <th class="todo-table__th">Title</th>
+          <th class="todo-table__th">Completed</th>
+          <th class="todo-table__th">Remove</th>
         </tr>
       </thead>
       <tbody data-todo="table-body"></tbody>
