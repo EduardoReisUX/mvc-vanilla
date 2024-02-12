@@ -30,18 +30,20 @@ export function renderTodoList(todos) {
 export function renderTodoTable(todos) {
   let markup = "";
 
-  todos.forEach(({ id, title, completed }) => {
+  todos.forEach(({ id, title, completed }, index) => {
     markup += `
-      <tr id="${id}">
-          <td ${
-            completed && "style='text-decoration: line-through'"
-          }>${title}</td>
-          <td >
+      <tr class="table-row__${index}" id="${id}">
+          <td class="data-title__${index} ${
+      completed && "checked"
+    }">${title}</td>
+          <td class="data-completed__${index}">
             <input name="completed" type="checkbox" data-todo="toggle" ${
               completed && "checked"
             }>
-            </td>
-            <td><button data-todo="remove">Remove Todo</button></td>
+          </td>
+          <td class="data-remove__${index}">
+            <button data-todo="remove">Remove Todo</button>
+          </td>
       </tr>
   `;
   });

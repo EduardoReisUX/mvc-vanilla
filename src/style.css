@@ -54,3 +54,8 @@ body {
 .todo-table tr:hover {
   background-color: #ddd;
 }
+
+/* Select all classes that begins with data-title__ and has .checked*/
+[class^="data-title__"].checked {
+  text-decoration: line-through;
+}
