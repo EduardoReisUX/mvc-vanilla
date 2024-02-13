@@ -1,12 +1,18 @@
 # MVC Vanilla JS
 
-Writing a scallabe and testable web applicaton with only JavaScript following MVC architecture.
+Writing a scallabe and testable web applicaton with only JavaScript following only MVC architecture with TDD methodology. After that it was done, the project was modified to use TypeScript alongside Vite as bundler tool.
 
 ## Learnings
 
 ### MVC architecture
 
-### insertAdjacentHTML
+### replaceChildren and insertAdjacentHTML
+
+A very convenient to write into the HTML with javascript is with the use of `replaceChildren` and `insertAdjacentHTML` methods!
+
+Calling `document.replaceChildren()` will empty a document of all its children. It is used in `this.elements.tableBody?.replaceChildren()`, where it will clear all `tableBody` children. 
+
+Afterwards, the method `insertAdjacentHTML("afterbegin", markup)` is called. It will get a markup string to be parsed as HTML or XML and insert into the DOM tree. Just inside the element, before its first child.
 
 ### target.closest
 
@@ -57,3 +63,5 @@ BEM in CSS has this structure: `.[Block]__[Element]--[Modifier]`
 - [Construindo um simples projeto MVC do zero com JavaScript](https://www.isarubim.com/posts/construindo-um-simples-projeto-mvc-do-zero-com-javascript)
 - [Binding Event Listeners to Dynamically Created Elements in JavaScript](https://medium.com/@yurchenkor33/binding-event-listeners-to-dynamically-created-elements-in-javascript-a2e30d156b8e)
 - [Why is Event.target not Element in Typescript?](https://stackoverflow.com/questions/28900077/why-is-event-target-not-element-in-typescript)
+- [Document: replaceChildren() method](https://developer.mozilla.org/en-US/docs/Web/API/Document/replaceChildren)
+- [Element: insertAdjacentHTML() method](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML)
