@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "live-server ./src --port=8000 host=http://localhost:8000",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "vitest",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
@@ -16,7 +18,7 @@
   "devDependencies": {
     "cypress": "^13.6.4",
     "jsdom": "^24.0.0",
-    "live-server": "^1.2.2",
+    "vite": "^5.1.1",
     "vitest": "^1.2.2"
   }
 }
