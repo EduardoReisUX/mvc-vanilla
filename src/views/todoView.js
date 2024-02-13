@@ -1,53 +1,53 @@
 // @ts-check
-import { elements } from "./elements.js";
 
-/**
- *
- * @param {import("../models/Todo.js").ITodo[]} todos
- */
-export function renderTodoList(todos) {
-  let markup = "";
+export class TodoView {
+  /** @type {import("../models/Todo.js").Todo} */
+  #todoModel;
 
-  todos.forEach(({ id, title, completed }) => {
-    markup += `
-    <li id="${id}">
-      <input name="completed" type="checkbox" data-todo="toggle" ${
+  elements = {
+    /** @type {HTMLInputElement | null} */
+    input: document.querySelector("[data-todo='new']"),
+    /** @type {HTMLButtonElement | null} */
+    deleteButton: document.querySelector("[data-todo='delete']"),
+    /** @type {HTMLButtonElement | null} */
+    removeButton: document.querySelector("[data-todo='remove']"),
+    /** @type {HTMLUListElement | null} */
+    list: document.querySelector("[data-todo='list']"),
+    /** @type {HTMLTableElement | null} */
+    tableBody: document.querySelector("[data-todo='table-body']"),
+    /** @type {HTMLInputElement | null} */
+    checkbox: document.querySelector("[data-todo='toggle']"),
+  };
+
+  /** @param {import("../models/Todo.js").Todo} todoModel */
+  constructor(todoModel) {
+    this.#todoModel = todoModel;
+  }
+
+  renderTodoTable() {
+    const todos = this.#todoModel.getAllTodos();
+    let markup = "";
+    debugger;
+
+    todos.forEach(({ id, title, completed }, index) => {
+      markup += `
+        <tr class="table-row__${index}" id="${id}">
+            <td class="data-title__${index} ${
         completed && "checked"
-      }>
-      ${completed ? `<s>${title}</s>` : `${title}`}
-    </li>
-  `;
-  });
+      }">${title}</td>
+            <td class="data-completed__${index}">
+              <input name="completed" type="checkbox" data-todo="toggle" ${
+                completed && "checked"
+              }>
+            </td>
+            <td class="data-remove__${index}">
+              <button data-todo="remove">Remove Todo</button>
+            </td>
+        </tr>
+      `;
+    });
 
-  elements.list?.replaceChildren();
-  elements.list?.insertAdjacentHTML("afterbegin", markup);
-}
-
-/**
- *
- * @param {import("../models/Todo.js").ITodo[]} todos
- */
-export function renderTodoTable(todos) {
-  let markup = "";
-
-  todos.forEach(({ id, title, completed }, index) => {
-    markup += `
-      <tr class="table-row__${index}" id="${id}">
-          <td class="data-title__${index} ${
-      completed && "checked"
-    }">${title}</td>
-          <td class="data-completed__${index}">
-            <input name="completed" type="checkbox" data-todo="toggle" ${
-              completed && "checked"
-            }>
-          </td>
-          <td class="data-remove__${index}">
-            <button data-todo="remove">Remove Todo</button>
-          </td>
-      </tr>
-  `;
-  });
-
-  elements.tableBody?.replaceChildren();
-  elements.tableBody?.insertAdjacentHTML("afterbegin", markup);
+    this.elements.tableBody?.replaceChildren();
+    this.elements.tableBody?.insertAdjacentHTML("afterbegin", markup);
+  }
 }

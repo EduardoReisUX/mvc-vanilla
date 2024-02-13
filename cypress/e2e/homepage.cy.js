@@ -1,6 +1,6 @@
 describe("Homepage", () => {
   it("should create, read, update and delete todos", () => {
-    cy.visit("http://localhost:8000/");
+    cy.visit("/");
 
     // Should enter values (create)
     cy.get(".data-section__input").type("Ninjutsu{enter}");

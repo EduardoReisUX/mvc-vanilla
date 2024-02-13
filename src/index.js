@@ -1,10 +1,10 @@
 // @ts-check
 
 import { Todo } from "./models/Todo.js";
-import { renderTodoTable } from "./views/todoView.js";
-import { elements } from "./views/elements.js";
+import { TodoView } from "./views/todoView.js";
 
 const todoModel = new Todo("todo");
+const todoView = new TodoView(todoModel);
 
 export const main = {
   /** @param {KeyboardEvent} event */
@@ -15,13 +15,13 @@ export const main = {
       return { error: "User doesn't pressed Enter key or input was empty" };
     }
 
-    if (!elements.input) {
+    if (!todoView.elements.input) {
       return { error: "Input element doens't exists!" };
     }
 
     todoModel.addTodo({ title: event.target.value.trim() });
 
-    elements.input.value = "";
+    todoView.elements.input.value = "";
   },
 
   /** @param {MouseEvent} event  */
@@ -72,16 +72,19 @@ export const main = {
   },
 
   render() {
-    renderTodoTable(todoModel.getAllTodos());
+    todoView.renderTodoTable();
   },
 
   init() {
     todoModel.addEventListener("save", main.render);
-    elements.input?.addEventListener("keypress", main.createTodoItem);
-    elements.deleteButton?.addEventListener("click", main.deleteCompletedTodos);
-    elements.list?.addEventListener("click", main.toggleTodoItem);
-    elements.tableBody?.addEventListener("click", main.toggleTodoItem);
-    elements.tableBody?.addEventListener("click", main.removeTodo);
+    todoView.elements.input?.addEventListener("keypress", main.createTodoItem);
+    todoView.elements.deleteButton?.addEventListener(
+      "click",
+      main.deleteCompletedTodos
+    );
+    todoView.elements.list?.addEventListener("click", main.toggleTodoItem);
+    todoView.elements.tableBody?.addEventListener("click", main.toggleTodoItem);
+    todoView.elements.tableBody?.addEventListener("click", main.removeTodo);
     main.render();
   },
 };
